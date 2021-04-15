@@ -3,7 +3,7 @@ package MediaUtils
 import (
 
 	"fmt"
-	"github.com/Freepaq/MediaManagement/MediaUtils/Setup"
+	
 	_ "github.com/rwcarlsen/goexif/exif"
 	_ "github.com/rwcarlsen/goexif/tiff"
 	"io/ioutil"
@@ -22,18 +22,18 @@ func fileStruct(files *[]string, origin string, eligibleFiles string) filepath.W
 		if info.IsDir() && origin != path {
 			//		filepath.Walk(path, fileStruct(files, path))
 		} else {
-			if Setup.VIDEO == eligibleFiles {
-				if Setup.IsVideoEligible(filepath.Ext(path)) {
+			if VIDEO == eligibleFiles {
+				if IsVideoEligible(filepath.Ext(path)) {
 					*files = append(*files, path)
 				}
 			}
-			if Setup.PHOTO == eligibleFiles {
-				if Setup.IsPhotoEligible(filepath.Ext(path)) {
+			if PHOTO == eligibleFiles {
+				if IsPhotoEligible(filepath.Ext(path)) {
 					*files = append(*files, path)
 				}
 			}
-			if Setup.ALL == eligibleFiles {
-				if Setup.IsMediEligible(filepath.Ext(path)) {
+			if ALL == eligibleFiles {
+				if IsMediEligible(filepath.Ext(path)) {
 					*files = append(*files, path)
 				}
 			}
@@ -51,7 +51,7 @@ func GetListOfFile(folder string, eligibleFiles string) []string {
 	return files
 }
 
-func Delete(file Setup.FileStruct) {
+func Delete(file FileStruct) {
 	err := os.Remove(file.FullName)
 	if err != nil {
 		fmt.Println(err)
@@ -60,17 +60,17 @@ func Delete(file Setup.FileStruct) {
 	}
 }
 
-func Rename(file *Setup.FileStruct) {
-	var n = (*file).CreationDate.Format(Setup.TimestampFormat)
+func Rename(file *FileStruct) {
+	var n = (*file).CreationDate.Format(TimestampFormat)
 	(*file).NewName = n + (*file).Extension
 	(*file).NewFullName = (*file).DestinationDir + (*file).NewName
 	fmt.Println("New name : [" + (*file).NewName + "]")
 }
 
-func Copy(ori *Setup.FileStruct, destFoler string, force bool) bool {
+func Copy(ori *FileStruct, destFoler string, force bool) bool {
 	year, month, _ := (*ori).CreationDate.Date()
 	dest := filepath.Join(destFoler, strconv.Itoa(year))
-	destMonth := filepath.Join(destFoler, strconv.Itoa(year), Setup.Months[int(month)])
+	destMonth := filepath.Join(destFoler, strconv.Itoa(year), Months[int(month)])
 	destFull := filepath.Join(destMonth, (*ori).NewName)
 	(*ori).DestinationDir = destMonth
 	(*ori).NewFullName = filepath.Join((*ori).DestinationDir, (*ori).NewName)
@@ -117,16 +117,16 @@ func writeFile(destFull string, input []byte) (error, bool) {
 	return err, true
 }
 
-func GetMeta(fname string) (Setup.FileStruct, error) {
-	fileStr := Setup.FileStruct{}
+func GetMeta(fname string) (FileStruct, error) {
+	fileStr := FileStruct{}
 
 	fileStr.FullName = fname
 	fileStr.NewFullName = fname
 
-	if Setup.IsVideoEligible(filepath.Ext(fname)) {
+	if IsVideoEligible(filepath.Ext(fname)) {
 		ReadVideoMeta(fname, &fileStr)
 	}
-	if Setup.IsPhotoEligible(filepath.Ext(fname)) {
+	if IsPhotoEligible(filepath.Ext(fname)) {
 		ReadPhotoMeta(fname, &fileStr)
 	}
 

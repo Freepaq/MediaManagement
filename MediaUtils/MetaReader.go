@@ -1,17 +1,16 @@
 package MediaUtils
 
 import (
-	"github.com/Freepaq/MediaManagement/MediaUtils/Setup"
 	"github.com/rwcarlsen/goexif/exif"
 	"log"
 	"os"
 )
 
-func ReadVideoMeta(fname string, fileStr *Setup.FileStruct) {
+func ReadVideoMeta(fname string, fileStr *FileStruct) {
 	readFromFile(fname, fileStr)
 }
 
-func ReadPhotoMeta(fname string, fileStr *Setup.FileStruct) {
+func ReadPhotoMeta(fname string, fileStr *FileStruct) {
 	f, err := os.Open(fname)
 	if err != nil {
 		log.Fatal(err)
@@ -22,15 +21,15 @@ func ReadPhotoMeta(fname string, fileStr *Setup.FileStruct) {
 		readFromFile(fname, fileStr)
 	} else {
 		fileStr.CreationDate, _ = x.DateTime()
-		fileStr.MetaOrigin = Setup.METAORIGINMETA
+		fileStr.MetaOrigin = METAORIGINMETA
 	}
 }
 
-func readFromFile(fname string, fileStr *Setup.FileStruct) {
+func readFromFile(fname string, fileStr *FileStruct) {
 	fileStat, err := os.Stat(fname)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fileStr.CreationDate = fileStat.ModTime()
-	fileStr.MetaOrigin = Setup.METAORIGINFILE
+	fileStr.MetaOrigin = METAORIGINFILE
 }
