@@ -3,7 +3,7 @@ package MediaUtils
 import (
 
 	"fmt"
-	"github.com/Freepaq/MediaManagement/pkg/Setup"
+	"github.com/Freepaq/MediaManagement/MediaUtils/Setup"
 	_ "github.com/rwcarlsen/goexif/exif"
 	_ "github.com/rwcarlsen/goexif/tiff"
 	"io/ioutil"
