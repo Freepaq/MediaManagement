@@ -1,0 +1,11 @@
+github.com/MediaArea/MediaInfoLib v0.7.99 h1:5px6C7JiMWN8yrFEuwsMxb7A7xvNgBCaI3W0Thlf7oI=
+github.com/dhowden/tag v0.0.0-20201120070457-d52dcb253c63 h1:/u5RVRk3Nh7Zw1QQnPtUH5kzcc8JmSSRpHSlGU/zGTE=
+github.com/dhowden/tag v0.0.0-20201120070457-d52dcb253c63/go.mod h1:SniNVYuaD1jmdEEvi+7ywb1QFR7agjeTdGKyFb0p7Rw=
+github.com/jkl1337/go-mediainfo v0.0.0-20150511200448-7ab7a0f36d69 h1:dmngD3Vsjicpn3luWRpNcclBmseXLTzrbGla1hWWtTE=
+github.com/jkl1337/go-mediainfo v0.0.0-20150511200448-7ab7a0f36d69/go.mod h1:b/+ODDGYLA+4Be9mtGtbT54FU0j1tGwlsERZp7Pxysw=
+github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd h1:CmH9+J6ZSsIjUK3dcGsnCnO41eRBOnY12zwkn5qVwgc=
+github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd/go.mod h1:hPqNNc0+uJM6H+SuU8sEs5K5IQeKccPqeSjfgcKGgPk=
+github.com/zelenin/go-mediainfo v1.0.0 h1:P0rKGyrSwKBCj37Ul7TLkrhf5OVBPlh3fFe9ZqjiaKQ=
+github.com/zelenin/go-mediainfo v1.0.0/go.mod h1:6jxR5y1gDozFdCD7NYq/kUjCo5nqeogYCal6wpv81nY=
+github.com/zhulik/go_mediainfo v0.0.0-20151224204459-29d57b2a6ea0 h1:LArnVt1z8677ir0iplBYjb9z2CGds34OLrtvcrjMAGw=
+github.com/zhulik/go_mediainfo v0.0.0-20151224204459-29d57b2a6ea0/go.mod h1:MRoR7mHzwQMd2TN1G1RTUkIBV+P9mX1DYQz8URX/QCI=
