@@ -1,4 +1,4 @@
-module MediaManagement
+module github.com/Freepaq/MediaManagement
 
 go 1.14
 

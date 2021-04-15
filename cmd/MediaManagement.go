@@ -1,9 +1,9 @@
 package main
 
 import (
-	"MediaManagement/pkg/MediaUtils"
-	"MediaManagement/pkg/Setup"
 	"fmt"
+	"github.com/Freepaq/MediaManagement/pkg/MediaUtils"
+	"github.com/Freepaq/MediaManagement/pkg/Setup"
 	"os"
 	"strings"
 )

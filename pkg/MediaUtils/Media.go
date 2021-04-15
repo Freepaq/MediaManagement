@@ -1,8 +1,9 @@
 package MediaUtils
 
 import (
-	"MediaManagement/pkg/Setup"
+
 	"fmt"
+	"github.com/Freepaq/MediaManagement/pkg/Setup"
 	_ "github.com/rwcarlsen/goexif/exif"
 	_ "github.com/rwcarlsen/goexif/tiff"
 	"io/ioutil"

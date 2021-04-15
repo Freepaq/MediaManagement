@@ -1,7 +1,7 @@
 package MediaUtils
 
 import (
-	"MediaManagement/pkg/Setup"
+	"github.com/Freepaq/MediaManagement/pkg/Setup"
 	"github.com/rwcarlsen/goexif/exif"
 	"log"
 	"os"
