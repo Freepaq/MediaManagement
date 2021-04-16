@@ -1,19 +1,67 @@
 package MediaUtils
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/rwcarlsen/goexif/exif"
 	"log"
 	"os"
+	"os/exec"
+	"strings"
+	"time"
 )
 
+type MyMapping map[string]interface{}
+
 func ReadVideoMeta(fname string, fileStr *FileStruct) {
-//	fmt.Println(os.Getwd())
-//	cmd := exec.Command("bin/mediainfo/MediaInfo.exe", " --Output=JSON ", fname)
+	//	fmt.Println(os.Getwd())
+	cmd, _ := exec.Command("bin/mediainfo/MediaInfo.exe", "--Output=JSON", fname).Output()
 
-//	var arr []string
-//	json.Unmarshal(cmd.Output(), &arr)
+	resultingMap := MyMapping{}
+	//	file, _ := ioutil.ReadFile("temp.txt")
+	if err := json.Unmarshal(cmd, &resultingMap); err != nil {
+		log.Println("json.Compact:", err)
+		if serr, ok := err.(*json.SyntaxError); ok {
+			log.Println("Occurred at offset:", serr.Offset)
+		}
+	}
+	var encodeDate = search(resultingMap, []string{"Encoded_Date", "File_Created_Date"})
+	if "" == encodeDate {
+		readFromFile(fname, fileStr)
+	} else {
+		time, err := time.Parse("2006-01-02T15:04:05", encodeDate)
+		if nil != err {
+			fmt.Println(err)
+		} else {
+			fileStr.CreationDate = time
+			fileStr.MetaOrigin = METAORIGINMETA
+		}
+	}
+}
+func search(str MyMapping, value []string) string {
+	var result = ""
+	var media MyMapping
+	media = str["media"].(map[string]interface{})
+	//	fmt.Println(reflect.TypeOf(media))
+	if nil != media {
+		var track []interface{}
+		track = media["track"].([]interface{})
+		if nil != track {
+			for _, m := range track {
+				for key, v := range m.(map[string]interface{}) {
+					if Contains(value, key) {
 
-	readFromFile(fname, fileStr)
+						var date = v.(string)
+						if "" != date {
+							dateArray := strings.Split(date, " ")
+							return dateArray[1] + "T" + dateArray[2]
+						}
+					}
+				}
+			}
+		}
+	}
+	return result
 }
 
 func ReadPhotoMeta(fname string, fileStr *FileStruct) {
