@@ -7,6 +7,12 @@ import (
 )
 
 func ReadVideoMeta(fname string, fileStr *FileStruct) {
+//	fmt.Println(os.Getwd())
+//	cmd := exec.Command("bin/mediainfo/MediaInfo.exe", " --Output=JSON ", fname)
+
+//	var arr []string
+//	json.Unmarshal(cmd.Output(), &arr)
+
 	readFromFile(fname, fileStr)
 }
 

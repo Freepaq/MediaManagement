@@ -1,9 +1,8 @@
 package MediaUtils
 
 import (
-
 	"fmt"
-	
+
 	_ "github.com/rwcarlsen/goexif/exif"
 	_ "github.com/rwcarlsen/goexif/tiff"
 	"io/ioutil"
@@ -98,8 +97,14 @@ func Copy(ori *FileStruct, destFoler string, force bool) bool {
 			fmt.Println("Destination file : [" + destFull + "] exists not override")
 		}
 	} else {
-		if err, result = writeFile(destFull, input); err != nil {
-			fmt.Println(err)
+		oriFile, err := ioutil.ReadFile((*ori).FullName)
+		destFile, err := ioutil.ReadFile(destFull)
+		if len(oriFile) == len(destFile) {
+			if err, result = writeFile(destFull, input); err != nil {
+				fmt.Println(err)
+			}
+		}else{
+
 		}
 	}
 	input = nil
