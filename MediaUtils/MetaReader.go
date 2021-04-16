@@ -25,6 +25,7 @@ func ReadVideoMeta(fname string, fileStr *FileStruct) {
 			log.Println("Occurred at offset:", serr.Offset)
 		}
 	}
+	fmt.Println("Current File :" + fname)
 	var encodeDate = search(resultingMap, []string{"Encoded_Date", "File_Created_Date"})
 	if "" == encodeDate {
 		readFromFile(fname, fileStr)
