@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/Freepaq/MediaManagement/MediaUtils"
+	"github.com/Freepaq/MediaManagement/pkg/MediaUtils"
+
 	"os"
 	"strings"
 )
