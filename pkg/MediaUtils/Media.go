@@ -100,7 +100,7 @@ func Copy(ori *FileStruct, destFoler string, force bool) bool {
 			if err, result = writeFile(destFull, input); err != nil {
 				fmt.Println(err)
 			}
-		}else{
+		} else {
 
 		}
 	}
@@ -127,9 +127,11 @@ func GetMeta(fname string) (FileStruct, error) {
 
 	if IsVideoEligible(filepath.Ext(fname)) {
 		ReadVideoMeta(fname, &fileStr)
+		fileStr.TypeOfMedia = VIDEO
 	}
 	if IsPhotoEligible(filepath.Ext(fname)) {
 		ReadPhotoMeta(fname, &fileStr)
+		fileStr.TypeOfMedia = PHOTO
 	}
 
 	fileStr.OriginDir, fileStr.Name = filepath.Split(fname)

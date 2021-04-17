@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/Freepaq/MediaManagement/pkg/MediaUtils"
-
 	"os"
+	"strconv"
 	"strings"
+
+	"github.com/Freepaq/MediaManagement/pkg/MediaUtils"
 )
 
 var actions []string
@@ -22,7 +23,11 @@ func main() {
 	dest := os.Args[4]
 	actions = strings.Split(action, ".")
 	rows := MediaUtils.GetListOfFile(origin, mediaType)
+	fmt.Println("Actions requested : " + strings.Join(actions, " - "))
+	fmt.Println("Media Type : " + mediaType)
 	fmt.Println(MediaUtils.SEPARATOR)
+	nbPhoto := 0
+	nbVideo := 0
 	for _, file := range rows {
 
 		meta, err := MediaUtils.GetMeta(file)
@@ -48,6 +53,15 @@ func main() {
 			}
 		}
 		fmt.Println(MediaUtils.SEPARATOR)
+		if meta.TypeOfMedia == MediaUtils.VIDEO {
+			nbVideo++
+		}
+		if meta.TypeOfMedia == MediaUtils.PHOTO {
+			nbPhoto++
+		}
+
 	}
+	fmt.Println("Number of Video : " + strconv.Itoa(nbVideo))
+	fmt.Println("Number of Photo : " + strconv.Itoa(nbPhoto))
 	fmt.Println("End Time :" + MediaUtils.CurrentTime)
 }

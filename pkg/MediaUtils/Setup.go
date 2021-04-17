@@ -11,9 +11,9 @@ var CurrentTime = time.Now().Format(TimestampFormat)
 
 var EligiblePhotoFile = []string{".jpg", ".gif", ".jpeg", ".png"}
 var EligibleVideoFile = []string{".mp4", ".mov", ".3gp"}
-var Months = map[int]string{1: "01 - Janvier", 2: "02 - Février", 3: "03- Mars",
-	4: "04- Avril", 5: "05- Mai", 6: "06- Juin", 7: "07- Juillet",
-	8: "08- Août", 9: "09- Septembre", 10: "10- Octobre", 11: "11- Novembre", 12: "12- Décembre"}
+var Months = map[int]string{1: "01 - Janvier", 2: "02 - Février", 3: "03 - Mars",
+	4: "04 - Avril", 5: "05 - Mai", 6: "06 - Juin", 7: "07 - Juillet",
+	8: "08 - Août", 9: "09 - Septembre", 10: "10 - Octobre", 11: "11 - Novembre", 12: "12 - Décembre"}
 
 const PHOTO = "PHOTO"
 const VIDEO = "VIDEO"
@@ -32,6 +32,7 @@ type FileStruct struct {
 	NewName        string
 	NewFullName    string
 	DestinationDir string
+	TypeOfMedia    string
 }
 
 func IsPhotoEligible(ext string) bool {
