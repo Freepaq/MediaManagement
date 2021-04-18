@@ -33,7 +33,7 @@ func ReadVideoMeta(fname string, fileStr *FileStruct) error {
 			return serr
 		}
 	} else {
-		encodeDate = search(resultingMap, []string{"DateTime", "Encoded_Date", "File_Created_Date"})
+		encodeDate = search(resultingMap, []string{"DateTime", "Encoded_Date"})
 	}
 	if encodeDate == "" {
 		readFromFile(fname, fileStr)
@@ -62,7 +62,6 @@ func search(str MyMapping, value []string) string {
 			for _, m := range track {
 				for key, v := range m.(map[string]interface{}) {
 					if Contains(value, key) {
-
 						var date = v.(string)
 						if date != "" {
 							dateArray := strings.Split(date, " ")
@@ -77,7 +76,6 @@ func search(str MyMapping, value []string) string {
 			for _, m := range track {
 				for key, v := range m.(map[string]interface{}) {
 					if Contains(value, key) {
-
 						var date = v.(string)
 						if date != "" {
 							dateArray := strings.Split(date, " ")
