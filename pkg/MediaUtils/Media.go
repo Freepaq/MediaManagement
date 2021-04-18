@@ -85,24 +85,35 @@ func Copy(ori *FileStruct, destFoler string, force bool) bool {
 		return false
 	}
 	var result = true
+	(*ori).Proccessed = true
 	if !force {
 		if _, err := os.Stat(destFull); os.IsNotExist(err) {
 			if err, result = writeFile(destFull, input); err != nil {
 				fmt.Println(err)
+				(*ori).Proccessed = false
 			}
 		} else {
-			fmt.Println("Destination file : [" + destFull + "] exists not override")
+			fmt.Println("Destination file : [" + destFull + "] exists, not overrided")
+			(*ori).Proccessed = false
 		}
+		(*ori).Proccessed = true
 	} else {
 		oriFile, err := ioutil.ReadFile((*ori).FullName)
+		if nil != err {
+			fmt.Println("Error reading  origin file :" + (*ori).FullName + " ")
+		}
 		destFile, err := ioutil.ReadFile(destFull)
+		if nil != err {
+			fmt.Println("Error reading destination file :" + destFull + " ")
+		}
 		if len(oriFile) == len(destFile) {
 			if err, result = writeFile(destFull, input); err != nil {
 				fmt.Println(err)
+				(*ori).Proccessed = false
 			}
-		} else {
-
+			(*ori).Proccessed = true
 		}
+		//TODO if force == true and dest file same origin file
 	}
 	input = nil
 	return result
@@ -126,7 +137,7 @@ func GetMeta(fname string) (FileStruct, error) {
 	fileStr.NewFullName = fname
 
 	if IsVideoEligible(filepath.Ext(fname)) {
-		ReadVideoMeta(fname, &fileStr)
+		_ = ReadVideoMeta(fname, &fileStr)
 		fileStr.TypeOfMedia = VIDEO
 	}
 	if IsPhotoEligible(filepath.Ext(fname)) {

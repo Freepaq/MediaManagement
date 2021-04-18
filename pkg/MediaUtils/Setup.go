@@ -33,6 +33,7 @@ type FileStruct struct {
 	NewFullName    string
 	DestinationDir string
 	TypeOfMedia    string
+	Proccessed     bool
 }
 
 func IsPhotoEligible(ext string) bool {

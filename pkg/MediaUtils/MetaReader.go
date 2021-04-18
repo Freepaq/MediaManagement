@@ -15,12 +15,13 @@ import (
 
 type MyMapping map[string]interface{}
 
-func ReadVideoMeta(fname string, fileStr *FileStruct) {
+func ReadVideoMeta(fname string, fileStr *FileStruct) error {
 	//fmt.Println("Current file :" + fname)
 	cmd := exec.Command("mediainfo/MediaInfo.exe", "--Output=JSON", "--Logfile=text.txt", fname)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println("Error reading METADATA :" + fmt.Sprint(err) + ": " + string(output))
+		return err
 	}
 	var encodeDate string
 	resultingMap := MyMapping{}
@@ -29,22 +30,26 @@ func ReadVideoMeta(fname string, fileStr *FileStruct) {
 		fmt.Println("json.Compact:", err)
 		if serr, ok := err.(*json.SyntaxError); ok {
 			fmt.Println("Occurred at offset:", serr.Offset)
+			return serr
 		}
 	} else {
-		encodeDate = search(resultingMap, []string{"Encoded_Date", "File_Created_Date"})
+		encodeDate = search(resultingMap, []string{"DateTime", "Encoded_Date", "File_Created_Date"})
 	}
-	if "" == encodeDate {
+	if encodeDate == "" {
 		readFromFile(fname, fileStr)
 	} else {
 		time, err := time.Parse("2006-01-02T15:04:05", encodeDate)
 		if nil != err {
 			fmt.Println(err)
+			return err
 		} else {
 			fileStr.CreationDate = time
 			fileStr.MetaOrigin = METAORIGINMETA
 		}
 	}
+	return nil
 }
+
 func search(str MyMapping, value []string) string {
 	var result = ""
 	var media MyMapping
@@ -59,7 +64,7 @@ func search(str MyMapping, value []string) string {
 					if Contains(value, key) {
 
 						var date = v.(string)
-						if "" != date {
+						if date != "" {
 							dateArray := strings.Split(date, " ")
 							return dateArray[1] + "T" + dateArray[2]
 						}
@@ -72,11 +77,6 @@ func search(str MyMapping, value []string) string {
 }
 
 func ReadPhotoMeta(fname string, fileStr *FileStruct) {
-	/*f, err := os.(fname)
-	if err != nil {
-		log.Fatal(err)
-	}*/
-	//f.Seek(0, 0)
 	x, err := extractTag(fname, "DateTime")
 	if err != nil {
 		readFromFile(fname, fileStr)
