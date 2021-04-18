@@ -72,6 +72,21 @@ func search(str MyMapping, value []string) string {
 				}
 			}
 		}
+		track = media["Video"].([]interface{})
+		if nil != track {
+			for _, m := range track {
+				for key, v := range m.(map[string]interface{}) {
+					if Contains(value, key) {
+
+						var date = v.(string)
+						if date != "" {
+							dateArray := strings.Split(date, " ")
+							return dateArray[1] + "T" + dateArray[2]
+						}
+					}
+				}
+			}
+		}
 	}
 	return result
 }
