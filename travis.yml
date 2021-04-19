@@ -1,8 +1,7 @@
 language: go
 
 go:
-  - 1.16
-  - main
+  - master
 stages:
   - lint
   - test
@@ -16,9 +15,6 @@ jobs:
         - go get -u golang.org/x/lint/golint
         - golint -set_exit_status
         - go vet -v
-    - stage: test
-      script:
-        - go test -v
     - stage: build
       script:
         - go build -mod=vendor
