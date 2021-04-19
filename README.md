@@ -1,5 +1,9 @@
 # MediaManagement
 
+[![Build Status](https://travis-ci.org/Freepaq/MediaManagment.svg?branch=main)](https://travis-ci.org/Freepaq/MediaManagment)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Freepaq/MediaManagment)](https://goreportcard.com/report/github.com/Freepaq/MediaManagment)
+
+
 Useful method to manage Videos and Photo
 
 func Contains(actions []string, key string) bool
