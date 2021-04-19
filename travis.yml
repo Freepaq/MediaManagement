@@ -12,6 +12,7 @@ jobs:
   include:
     - stage: lint
       script:
+        - go mod vendor
         - go get -u golang.org/x/lint/golint
         - golint -set_exit_status
         - go vet -v
@@ -20,7 +21,7 @@ jobs:
         - go test -v
     - stage: build
       script:
-        - go build
+        - go build -mod=vendor
 
 matrix:
   allow_failures:
