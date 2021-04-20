@@ -1,6 +1,6 @@
 # MediaManagement
 
-[![Build Status](https://travis-ci.org/Freepaq/MediaManagment.svg?branch=main)](https://travis-ci.org/Freepaq/MediaManagment)
+[![Build Status](https://travis-ci.org/Freepaq/MediaManagement.svg?branch=main)](https://travis-ci.org/Freepaq/MediaManagement)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Freepaq/MediaManagment)](https://goreportcard.com/report/github.com/Freepaq/MediaManagment)
 
 
