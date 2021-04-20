@@ -1,11 +1,10 @@
 language: go
 
 go:
-  - master
+1.16.3
+- master
 stages:
   - lint
-  - test
-  - build
 
 jobs:
   include:
