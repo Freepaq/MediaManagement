@@ -17,9 +17,13 @@ github.com/golang/geo/r2
 github.com/golang/geo/r3
 github.com/golang/geo/s1
 github.com/golang/geo/s2
+# golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5
+## explicit
 # golang.org/x/net v0.0.0-20210415231046-e915ea6b2b7d
 ## explicit
 golang.org/x/net/context
+# golang.org/x/tools v0.1.0
+## explicit
 # gopkg.in/yaml.v2 v2.4.0
 ## explicit
 gopkg.in/yaml.v2
