@@ -14,5 +14,4 @@ jobs:
         - go get -u golang.org/x/lint/golint
         - go mod vendor
         - golint -set_exit_status
-        - go vet -v pkg/MediaUtils/MetaReader.go
-        - go vet -v pkg/MediaUtils/Media.go
+        - go vet -v cmd/MediaManager.go
