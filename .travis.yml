@@ -10,7 +10,6 @@ jobs:
   include:
     - stage: lint
       script:
-        - chmod 777 cmd/tests/mediainfo/MediaInfo.exe
         - go mod vendor
         - go get -u golang.org/x/lint/golint
         - go mod vendor
