@@ -150,7 +150,6 @@ func Copy(ori *FileStruct, destFoler string, force bool) bool {
 				}
 			}
 		}
-		//TODO if force == true and dest file same origin file
 	}
 	input = nil
 	return result
