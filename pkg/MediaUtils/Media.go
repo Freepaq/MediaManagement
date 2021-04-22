@@ -165,7 +165,9 @@ func writeFileLooping(destFull string, input []byte, index int, f *FileStruct) (
 			return err, false
 		}
 		index++
-		err, b = writeFileLooping(destFull, input, index, f)
+		if err, b = writeFileLooping(destFull, input, index, f); !b {
+			return err, b
+		}
 	}
 	return nil, true
 }
@@ -185,6 +187,7 @@ func writeFile(destFull string, input []byte) (error, bool) {
 function to get the meta date of the media
 Return a FileStruct
 */
+
 func GetMeta(fname string) (FileStruct, error) {
 	fileStr := FileStruct{}
 
